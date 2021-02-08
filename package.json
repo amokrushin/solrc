@@ -15,16 +15,17 @@
   },
   "types": "./dist/types/index.d.ts",
   "scripts": {
-    "generate:introspect": "ts-node -T introspection/generate.ts",
     "build": "run-s build:clean build:types build:cjs build:esm",
-    "build:clean": "shx rm -rf dist",
-    "build:types": "tsc --declarationDir dist/types --declaration --emitDeclarationOnly",
     "build:cjs": "tsc --module commonjs --target es5 --outDir dist/cjs && echo '{\"type\": \"commonjs\"}' > dist/cjs/package.json",
+    "build:clean": "shx rm -rf dist",
     "build:esm": "tsc --module es2015 --target es5 --outDir dist/esm",
+    "build:types": "tsc --declarationDir dist/types --declaration --emitDeclarationOnly",
+    "example": "ts-node examples/base/example.ts",
+    "generate:introspect": "ts-node -T introspection/generate.ts",
+    "lint": "exit 0",
     "test": "exit 0",
     "postversion": "git push --follow-tags",
-    "precommit": "run-s lint test",
-    "example": "ts-node examples/base/example.ts"
+    "precommit": "run-s lint test"
   },
   "dependencies": {
     "got": "^11.8.1",
