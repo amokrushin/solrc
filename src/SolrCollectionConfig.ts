@@ -1,15 +1,7 @@
-import { SolrCollection } from './SolrCollection';
-import { SolrResponse } from './types';
+import { SolrCollectionConfigOverlayGetResponse } from './introspected';
+import type { SolrCollectionConfigGetResponse } from './introspected';
+import type { SolrCollection } from './SolrCollection';
 import preprocessParams from './utils/preprocessParams';
-
-interface SolrUserPropertiesResponse extends SolrResponse {
-  overlay: {
-    znodeVersion: number;
-    userProps: {
-      [key: string]: string;
-    };
-  };
-}
 
 export const enum SolrUserPropertyNames {
   'update.autoCreateFields' = 'update.autoCreateFields',
@@ -37,21 +29,22 @@ export class SolrCollectionConfig {
   }
 
   /**
-   * Set collection user defined property
-   * @see {@link https://lucene.apache.org/solr/guide/config-api.html#commands-for-user-defined-properties}
-   *
-   * @example
-   * await collection.config.setUserProperty('update.autoCreateFields', false);
+   * Gets the Solr configuration for a collection.
+   * @returns {Promise<*>}
    */
-  async setUserProperty(name: SolrUserPropertyNames | string, value: any) {
-    await this.setUserProperties({
-      [name]: value,
+  async getAll() {
+    return this.collection.request<
+      unknown,
+      unknown,
+      SolrCollectionConfigGetResponse
+    >({
+      endpoint: '/config',
     });
   }
 
   /**
    * Set user-defined properties
-   * @see {@link https://lucene.apache.org/solr/guide/config-api.html#commands-for-user-defined-properties}
+   * @see https://solr.apache.org/guide/solr/latest/configuration-guide/config-api.html#creating-and-updating-user-defined-properties
    *
    * @example
    * await collection.config.setUserProperty({
@@ -69,8 +62,21 @@ export class SolrCollectionConfig {
   }
 
   /**
+   * Set collection user defined property
+   * @see https://solr.apache.org/guide/solr/latest/configuration-guide/config-api.html#creating-and-updating-user-defined-properties
+   *
+   * @example
+   * await collection.config.setUserProperty('update.autoCreateFields', false);
+   */
+  async setUserProperty(name: SolrUserPropertyNames | string, value: any) {
+    await this.setUserProperties({
+      [name]: value,
+    });
+  }
+
+  /**
    * Remove a user-defined properties
-   * @see {@link https://lucene.apache.org/solr/guide/config-api.html#commands-for-user-defined-properties}
+   * @see https://solr.apache.org/guide/solr/latest/configuration-guide/config-api.html#creating-and-updating-user-defined-properties
    *
    * @example
    * await collection.config.unsetUserProperties({
@@ -95,12 +101,21 @@ export class SolrCollectionConfig {
     const body = await this.collection.request<
       unknown,
       unknown,
-      SolrUserPropertiesResponse
+      SolrCollectionConfigOverlayGetResponse
     >({
       endpoint: '/config/overlay',
     });
 
-    return body?.overlay?.userProps;
+    return body.overlay.userProps;
+  }
+
+  /**
+   * Get collection user defined property
+   * @returns {Promise<*>}
+   */
+  async getUserProperty(name: string) {
+    const userProps = await this.getUserProperties();
+    return userProps[name];
   }
 
   /**
