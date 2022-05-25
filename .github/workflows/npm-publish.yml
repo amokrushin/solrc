@@ -22,7 +22,7 @@ jobs:
       - run: npm run build
       - uses: actions/upload-artifact@v2
         with:
-          name: dist
+          name: lib
           path: lib/
           if-no-files-found: error
 
@@ -35,7 +35,7 @@ jobs:
         with:
           node-version: 16
           registry-url: https://registry.npmjs.org/
-      - uses: actions/download-artifact@v2
+      - uses: actions/download-artifact@v3
       - run: npm ci
       - run: npm publish
         env:
