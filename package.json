@@ -1,6 +1,6 @@
 {
   "name": "solrc",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "A Solr client for Node",
   "license": "MIT",
   "author": "Anton Mokrushin <anton@mokr.org>",
