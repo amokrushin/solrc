@@ -1,0 +1,13 @@
+{
+  "name": "solrc-cjs-list-collections-example",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node main.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.1",
+    "solrc": "file:../.."
+  },
+  "type": "commonjs"
+}
