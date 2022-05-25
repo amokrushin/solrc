@@ -1,6 +1,6 @@
 {
   "name": "solrc",
-  "version": "0.2.6",
+  "version": "0.2.7",
   "description": "A Solr client for Node",
   "license": "MIT",
   "author": "Anton Mokrushin <anton@mokr.org>",
@@ -29,12 +29,10 @@
   },
   "dependencies": {
     "got": "^12.0.4",
-    "lodash": "^4.17.21",
-    "luxon": "^2.4.0"
+    "lodash": "^4.17.21"
   },
   "devDependencies": {
     "@types/lodash": "^4.14.182",
-    "@types/luxon": "^2.3.2",
     "@types/node": "^16.11.36",
     "@typescript-eslint/eslint-plugin": "^5.24.0",
     "@typescript-eslint/parser": "^5.24.0",
