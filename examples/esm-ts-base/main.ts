@@ -1,4 +1,9 @@
+import assert from 'assert';
 import dotenv from 'dotenv';
+import find from 'lodash/find';
+import isEqual from 'lodash/isEqual';
+import map from 'lodash/map';
+import some from 'lodash/some';
 import process from 'process';
 import { SolrClient } from '../../src';
 
@@ -25,7 +30,12 @@ async function main() {
 
   // Ping connection
   await collection.admin.ping();
+  console.log('OK');
 
+  /*
+   * Schema
+   */
+  console.log('Manage schema');
   // Update collection schema
   await collection.schema.fields.add([
     {
@@ -41,14 +51,18 @@ async function main() {
       type: 'string',
     },
   ]);
-
   await collection.schema.copyFields.add([
     {
       source: 'foo',
       dest: ['bar', 'baz'],
     },
   ]);
+  console.log('OK');
 
+  /*
+   * Docs
+   */
+  console.log('Manage docs');
   // Add documents
   await collection.docs.update([
     {
@@ -60,45 +74,54 @@ async function main() {
       foo: 'baz',
     },
   ]);
-
   // One more document
   await collection.docs.update({
     id: 3,
     foo: 'bak',
   });
-
+  // Delete one document
+  await collection.docs.deleteById(2);
   // Commit changes
   await collection.commit();
+  console.log('OK');
 
-  // Query docs
-  const res = await collection.query({
+  /*
+   * Query
+   */
+  console.log('Query docs');
+  const { docs } = await collection.query({
     query: '*:*',
   });
-
-  // Print found docs
-  console.log('\nFound docs');
-  console.dir(res, { colors: true, depth: 4 });
+  assert(isEqual(map(docs, 'id').map(Number), [1, 3]));
+  console.log('OK');
 
   /*
    * Alias
    */
-
-  // Create alias
+  console.log('Create alias');
   await collection.createAlias({
     name: 'demo',
   });
+  const aliases1 = await solr.collections.listAliases();
+  assert(find(aliases1, ['name', 'demo'])?.collection === name);
+  console.log('OK');
 
-  // List aliases
-  const aliases = await solr.collections.listAliases();
-  console.log('\naliases');
-  console.dir(aliases, { colors: true, depth: 1 });
-
+  console.log('Delete alias');
   await solr.collections.deleteAlias({
     name: 'demo',
   });
+  const aliases2 = await solr.collections.listAliases();
+  assert(!some(aliases2, ['name', 'demo']));
+  console.log('OK');
 
-  // Delete collection
+  /*
+   * Collection
+   */
+  console.log('Delete collection');
   await collection.delete();
+  const collectionNames = await solr.collections.listNames();
+  assert(!some(collectionNames, name));
+  console.log('OK');
 }
 
 main().catch(console.error);
