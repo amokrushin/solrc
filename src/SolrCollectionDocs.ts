@@ -6,7 +6,7 @@ import type { SolrCollection } from './SolrCollection';
 import { SolrDoc } from './types';
 import { castArray } from './utils/generic';
 
-type SolrDeleteDef = { id: string | string[] } | { query: string };
+type SolrDeleteDef = string | string[] | { query: string };
 
 export class SolrCollectionDocs {
   /**
@@ -55,7 +55,7 @@ export class SolrCollectionDocs {
   async delete(deleteDef: SolrDeleteDef) {
     await this.collection.request({
       method: 'post',
-      endpoint: `/update`,
+      endpoint: '/update',
       data: {
         delete: deleteDef,
       },
@@ -81,9 +81,7 @@ export class SolrCollectionDocs {
    * await collection.docs.deleteById([1, 2]);
    */
   async deleteById(ids: string | string[] | number | number[]) {
-    await this.delete({
-      id: castArray(ids).filter(Boolean).map(String),
-    });
+    await this.delete(castArray(ids).filter(Boolean).map(String));
   }
 
   /**
