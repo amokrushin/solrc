@@ -300,7 +300,6 @@ export interface SolrCollectionConfigGetResponse extends SolrResponse {
         default: string;
         name: string;
         processor: string;
-        '': [[Object], [Object], [Object]];
       }
     ];
     updateHandlerupdateLog: { numVersionBuckets: number; dir: string };
@@ -327,7 +326,7 @@ export interface SolrCollectionConfigGetResponse extends SolrResponse {
       writeLockTimeout: number;
       lockType: string;
       infoStreamEnabled: boolean;
-      metrics: {};
+      metrics: unknown;
     };
   };
 }
