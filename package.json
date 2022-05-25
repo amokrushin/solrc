@@ -24,7 +24,8 @@
     "build:esm": "tsc --module es2020 --outDir lib/esm",
     "build:cjs": "tsc --module commonjs --outDir lib/cjs && echo '{\"type\": \"commonjs\"}' > lib/cjs/package.json",
     "hook:precommit": "npm run check:fix",
-    "test": "exit 0"
+    "test": "exit 0",
+    "prepare": "husky install"
   },
   "dependencies": {
     "got": "^12.0.4",
@@ -40,6 +41,7 @@
     "boolean": "^3.2.0",
     "eslint": "^8.15.0",
     "eslint-config-prettier": "^8.5.0",
+    "husky": "^8.0.1",
     "prettier": "^2.6.2",
     "typescript": "^4.6.4"
   },
