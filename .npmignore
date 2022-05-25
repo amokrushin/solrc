@@ -159,6 +159,7 @@ dist
 /.husky/
 /examples/
 /introspection/
+/src/
 .eslint*
 .prettier*
 tsconfig.json
