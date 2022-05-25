@@ -34,10 +34,6 @@ export interface SolrRequestParams<D, P> {
    * @default v2
    */
   apiVersion?: 'v1' | 'v2';
-  /**
-   * Checks response status code is zero, throws error otherwise.
-   */
-  checkResponse?: boolean;
 }
 
 export interface SolrClientParams {
@@ -165,7 +161,6 @@ export class SolrClient {
       endpoint = '',
       data = {},
       apiVersion = 'v2',
-      checkResponse = true,
       ...restParams
     } = params;
 

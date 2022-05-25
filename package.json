@@ -15,11 +15,10 @@
   },
   "types": "./lib/types/index.d.ts",
   "scripts": {
-    "check": "npm run check:eslint && npm run check:prettier && npm run check:gitlab-ci",
+    "check": "npm run check:eslint && npm run check:prettier",
     "check:fix": "npm run check:eslint -- --fix && npm run check:prettier -- --write",
     "check:eslint": "eslint src/",
     "check:prettier": "prettier --check src/",
-    "check:gitlab-ci": "gitlab-ci-lint --url http://gitlab.estp.sro",
     "build": "rm -rf lib && npm run build:types && npm run build:esm && npm run build:cjs",
     "build:types": "tsc --declaration true --declarationDir lib/types --emitDeclarationOnly",
     "build:esm": "tsc --module es2020 --outDir lib/esm",
