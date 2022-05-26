@@ -17,5 +17,5 @@ export * from './SolrQuery';
 
 export type MaybeCollection<T> = T | T[];
 export type SolrDoc = {
-  [k: string]: string | number | string[] | number[] | boolean;
+  [k: string]: string | number | string[] | number[] | boolean | null;
 };

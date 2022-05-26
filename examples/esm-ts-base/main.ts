@@ -1,9 +1,9 @@
 import assert from 'assert';
 import dotenv from 'dotenv';
 import find from 'lodash/find';
-import isEqual from 'lodash/isEqual';
-import map from 'lodash/map';
+import isMatch from 'lodash/isMatch';
 import some from 'lodash/some';
+import sortBy from 'lodash/sortBy';
 import process from 'process';
 import { SolrClient } from '../../src';
 
@@ -50,6 +50,11 @@ async function main() {
       name: 'baz',
       type: 'string',
     },
+    {
+      name: 'multi',
+      type: 'string',
+      multiValued: true,
+    },
   ]);
   await collection.schema.copyFields.add([
     {
@@ -68,19 +73,27 @@ async function main() {
     {
       id: 1,
       foo: 'bar',
+      multi: ['a', 'b'],
     },
     {
       id: 2,
       foo: 'baz',
+      multi: ['c', 'd'],
     },
   ]);
   // One more document
   await collection.docs.update({
     id: 3,
     foo: 'bak',
+    multi: ['e', 'f'],
   });
   // Delete one document
   await collection.docs.deleteById(2);
+  // Update one document
+  await collection.docs.update({
+    id: 3,
+    multi: null,
+  });
   // Commit changes
   await collection.commit();
   console.log('OK');
@@ -92,7 +105,18 @@ async function main() {
   const { docs } = await collection.query({
     query: '*:*',
   });
-  assert(isEqual(map(docs, 'id').map(Number), [1, 3]));
+  assert(
+    isMatch(sortBy(docs, 'id'), [
+      {
+        id: '1',
+        foo: 'bar',
+        bar: 'bar',
+        baz: 'bar',
+        multi: ['a', 'b'],
+      },
+      { id: '3' },
+    ])
+  );
   console.log('OK');
 
   /*
