@@ -1,6 +1,1 @@
-## Alias Management
-
-* ⚫ `CREATEALIAS`
-* ✔️ `LISTALIASES`: `solr.collections.listAliases`
-* ⚫ `ALIASPROP`
-* ⚫ `DELETEALIAS`
+# Solr client for Node

@@ -2,10 +2,20 @@
   "name": "solrc",
   "version": "0.2.9",
   "description": "A Solr client for Node",
+  "keywords": [
+    "solr"
+  ],
+  "homepage": "https://github.com/amokrushin/solrc#readme",
+  "bugs": {
+    "url": "https://github.com/amokrushin/solrc/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/amokrushin/solrc.git"
+  },
   "license": "MIT",
   "author": "Anton Mokrushin <anton@mokr.org>",
-  "main": "./lib/cjs/index.js",
-  "module": "./lib/esm/index.js",
+  "type": "module",
   "exports": {
     ".": {
       "require": "./lib/cjs/index.js",
@@ -13,19 +23,24 @@
     },
     "./package.json": "./package.json"
   },
+  "main": "./lib/cjs/index.js",
+  "module": "./lib/esm/index.js",
   "types": "./lib/types/index.d.ts",
+  "directories": {
+    "example": "examples"
+  },
   "scripts": {
-    "check": "npm run check:eslint && npm run check:prettier",
-    "check:fix": "npm run check:eslint -- --fix && npm run check:prettier -- --write",
-    "check:eslint": "eslint src/",
-    "check:prettier": "prettier --check src/",
     "build": "rm -rf lib && npm run build:types && npm run build:esm && npm run build:cjs",
-    "build:types": "tsc --declaration true --declarationDir lib/types --emitDeclarationOnly",
-    "build:esm": "tsc --module es2020 --outDir lib/esm",
     "build:cjs": "tsc --module commonjs --outDir lib/cjs && echo '{\"type\": \"commonjs\"}' > lib/cjs/package.json",
+    "build:esm": "tsc --module es2020 --outDir lib/esm",
+    "build:types": "tsc --declaration true --declarationDir lib/types --emitDeclarationOnly",
+    "check": "npm run check:eslint && npm run check:prettier",
+    "check:eslint": "eslint src/",
+    "check:fix": "npm run check:eslint -- --fix && npm run check:prettier -- --write",
+    "check:prettier": "prettier --check src/",
     "hook:precommit": "npm run check:fix",
-    "test": "exit 0",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "test": "exit 0"
   },
   "dependencies": {
     "got": "^12.1.0",
@@ -46,6 +61,5 @@
   "engines": {
     "node": ">=16",
     "npm": ">=8"
-  },
-  "type": "module"
+  }
 }
