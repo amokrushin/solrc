@@ -1,3 +1,5 @@
+import { SolrCollectionsBackupsPostRequest } from './introspected';
+import { SolrCollectionsBackupsListBackupsParams } from './introspected';
 import type { SolrCollectionSetCollectionPropertyParams } from './introspected';
 import type { SolrCollectionDeleteReplicaPropertyParams } from './introspected';
 import type { SolrCollectionRebalanceLeadersParams } from './introspected';
@@ -14,6 +16,7 @@ import type { SolrCollectionsBackupCollectionParams } from './introspected';
 import type { SolrCollectionsRestoreCollectionParams } from './introspected';
 import type { SolrCollectionMigrateDocsParams } from './introspected';
 import type { SolrCollectionGetResponse } from './introspected';
+import { SolrCollectionsBackupsListBackupsResponse } from './introspected/SolrCollectionsBackupsListBackupsResponse';
 import type { SolrRequestParams } from './SolrClient';
 import type { SolrCollectionAdminPingResponse } from './SolrCollectionAdmin';
 import { SolrCollectionAdmin } from './SolrCollectionAdmin';
@@ -271,33 +274,63 @@ export class SolrCollection {
   }
 
   async backup(
-    params: Omit<SolrCollectionsBackupCollectionParams, 'collection'>
+    params: Omit<SolrCollectionsBackupCollectionParams, 'collection' | 'name'>
   ) {
-    const backupCollectionParams: SolrCollectionsBackupCollectionParams = {
-      ...params,
-      collection: this.name,
-    };
-
     return this.collections.request<SolrCollectionsPostRequest>({
       method: 'post',
       data: {
-        'backup-collection': backupCollectionParams,
+        'backup-collection': {
+          ...params,
+          collection: this.name,
+          name: this.name,
+        },
       },
     });
   }
 
   async restore(
-    params: Omit<SolrCollectionsRestoreCollectionParams, 'collection'>
+    params: Omit<SolrCollectionsRestoreCollectionParams, 'collection' | 'name'>
   ) {
-    const restoreCollectionParams: SolrCollectionsRestoreCollectionParams = {
-      ...params,
-      collection: this.name,
-    };
-
     return this.collections.request<SolrCollectionsPostRequest>({
       method: 'post',
       data: {
-        'restore-collection': restoreCollectionParams,
+        'restore-collection': {
+          ...params,
+          collection: this.name,
+          name: this.name,
+        },
+      },
+    });
+  }
+
+  /**
+   * Lists information about each backup stored at the specified repository location. Basic metadata is returned about each backup including: the timestamp the backup was created, the Lucene version used to create the index, and the size of the backup both in number of files and total filesize.
+   *
+   * The file structure used by Solr internally to represent backups changed in 8.9.0. While backups created prior to this format change can still be restored, the LISTBACKUP and DELETEBACKUP API commands are only valid on this newer format. Attempting to use them on a location holding an older backup will result in an error message.
+   *
+   * @see https://solr.apache.org/guide/solr/latest/deployment-guide/collection-management.html#listbackup
+   *
+   * @example
+   * ```
+   * await solr.collections.listBackups();
+   * ```
+   */
+  async listBackups(
+    params: Omit<SolrCollectionsBackupsListBackupsParams, 'name'>
+  ) {
+    return this.collections.request<
+      SolrCollectionsBackupsPostRequest,
+      unknown,
+      SolrCollectionsBackupsListBackupsResponse
+    >({
+      method: 'post',
+      endpoint: '/backups',
+      apiVersion: 'v2',
+      data: {
+        'list-backups': {
+          ...params,
+          name: this.name,
+        },
       },
     });
   }

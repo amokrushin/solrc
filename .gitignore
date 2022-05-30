@@ -156,4 +156,4 @@ dist
 .pnp.*
 
 /lib/
-/examples/debug
+/examples/debug*

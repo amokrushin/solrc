@@ -1,7 +1,10 @@
 import assert from 'assert';
+import { SolrCollectionsBackupsListBackupsParams } from './introspected';
+import { SolrCollectionsBackupsPostRequest } from './introspected';
 import { SolrCollectionsDeleteAliasParams } from './introspected';
 import { SolrCollectionsPostRequest } from './introspected';
 import { SolrCollectionsCreateAliasParams } from './introspected';
+import { SolrCollectionsBackupsListBackupsResponse } from './introspected/SolrCollectionsBackupsListBackupsResponse';
 import { SolrClient } from './SolrClient';
 import { SolrRequestParams } from './SolrClient';
 import { SolrCollection } from './SolrCollection';
@@ -155,6 +158,33 @@ export class SolrCollections {
           name: params.name,
           async: params.async,
         },
+      },
+    });
+  }
+
+  /**
+   * Lists information about each backup stored at the specified repository location. Basic metadata is returned about each backup including: the timestamp the backup was created, the Lucene version used to create the index, and the size of the backup both in number of files and total filesize.
+   *
+   * The file structure used by Solr internally to represent backups changed in 8.9.0. While backups created prior to this format change can still be restored, the LISTBACKUP and DELETEBACKUP API commands are only valid on this newer format. Attempting to use them on a location holding an older backup will result in an error message.
+   *
+   * @see https://solr.apache.org/guide/solr/latest/deployment-guide/collection-management.html#listbackup
+   *
+   * @example
+   * ```
+   * await solr.collections.listBackups();
+   * ```
+   */
+  async listBackups(params: SolrCollectionsBackupsListBackupsParams) {
+    return this.request<
+      SolrCollectionsBackupsPostRequest,
+      unknown,
+      SolrCollectionsBackupsListBackupsResponse
+    >({
+      method: 'post',
+      endpoint: '/backups',
+      apiVersion: 'v2',
+      data: {
+        'list-backups': params,
       },
     });
   }

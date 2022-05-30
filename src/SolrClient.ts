@@ -1,6 +1,10 @@
 import assert from 'assert';
 import got from 'got';
 import { URLSearchParams } from 'url';
+import { SolrCollectionNodeSystemGetRequest } from './introspected';
+import { SolrCollectionNodePropertiesGetRequest } from './introspected/SolrCollectionNodePropertiesGetRequest';
+import { SolrCollectionNodePropertiesGetResponse } from './introspected/SolrCollectionNodePropertiesGetResponse';
+import { SolrCollectionNodeSystemGetResponse } from './introspected/SolrCollectionNodeSystemGetResponse';
 import { SolrCollections } from './SolrCollections';
 import { SolrConfigSets } from './SolrConfigSets';
 import { SolrRequestError } from './SolrRequestError';
@@ -201,5 +205,27 @@ export class SolrClient {
         params,
       });
     }
+  }
+
+  async getSystemInfo() {
+    return this.request<
+      SolrCollectionNodeSystemGetRequest,
+      unknown,
+      SolrCollectionNodeSystemGetResponse
+    >({
+      method: 'get',
+      endpoint: '/node/system',
+    });
+  }
+
+  async getProperties() {
+    return this.request<
+      SolrCollectionNodePropertiesGetRequest,
+      unknown,
+      SolrCollectionNodePropertiesGetResponse
+    >({
+      method: 'get',
+      endpoint: '/node/properties',
+    });
   }
 }
