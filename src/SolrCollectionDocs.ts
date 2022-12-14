@@ -2,6 +2,7 @@ import ary from 'lodash/ary';
 import map from 'lodash/map';
 import { Writable } from 'stream';
 import { WritableOptions } from 'stream';
+import { SolrCollectionOptions } from './SolrCollection';
 import type { SolrCollection } from './SolrCollection';
 import { SolrDoc } from './types';
 import { castArray } from './utils/generic';
@@ -36,14 +37,14 @@ export class SolrCollectionDocs {
    *   },
    * ]);
    */
-  async update(docs: SolrDoc | SolrDoc[]) {
+  async update(docs: SolrDoc | SolrDoc[], options?: SolrCollectionOptions) {
     await this.collection.request({
       method: 'post',
       endpoint: `/update/json/commands`,
       data: {
         add: castArray(docs),
       },
-      params: { commit: this.collection.options.autoCommit },
+      params: { commit: this.collection.options.autoCommit, ...options },
     });
   }
 
