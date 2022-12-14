@@ -1,6 +1,6 @@
 {
   "name": "solrc",
-  "version": "0.2.11",
+  "version": "0.2.12",
   "description": "A Solr client for Node",
   "keywords": [
     "solr"
