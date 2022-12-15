@@ -44,7 +44,9 @@ export class SolrCollectionDocs {
       data: {
         add: castArray(docs),
       },
-      params: { commit: this.collection.options.autoCommit, ...options },
+      params: {
+        commit: options?.autoCommit ?? this.collection.options.autoCommit,
+      },
     });
   }
 
