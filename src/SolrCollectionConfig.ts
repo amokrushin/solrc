@@ -1,7 +1,7 @@
-import { SolrCollectionConfigOverlayGetResponse } from './introspected';
-import type { SolrCollectionConfigGetResponse } from './introspected';
-import type { SolrCollection } from './SolrCollection';
-import preprocessParams from './utils/preprocessParams';
+import { SolrCollectionConfigOverlayGetResponse } from './introspected/index.js';
+import type { SolrCollectionConfigGetResponse } from './introspected/index.js';
+import type { SolrCollection } from './SolrCollection.js';
+import preprocessParams from './utils/preprocessParams.js';
 
 export const enum SolrUserPropertyNames {
   'update.autoCreateFields' = 'update.autoCreateFields',

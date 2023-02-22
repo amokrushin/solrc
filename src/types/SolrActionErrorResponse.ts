@@ -1,6 +1,6 @@
-import { SolrActionError } from './SolrActionError';
-import { SolrActionException } from './SolrActionException';
-import { SolrResponse } from './SolrResponse';
+import { SolrActionError } from './SolrActionError.js';
+import { SolrActionException } from './SolrActionException.js';
+import { SolrResponse } from './SolrResponse.js';
 
 export interface SolrActionErrorResponse extends SolrResponse {
   error?: SolrActionError;

@@ -4,7 +4,7 @@
  */
 
 /**
- * @version Solr 9.x
+ * @version Solr 8.x, 9.x
  */
 export interface SolrCollectionsBackupsDeleteBackupsParams {
   async?: string;
@@ -14,6 +14,4 @@ export interface SolrCollectionsBackupsDeleteBackupsParams {
   name: string;
   location?: string;
   repository?: string;
-
-  [k: string]: unknown;
 }

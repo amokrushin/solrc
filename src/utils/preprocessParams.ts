@@ -1,5 +1,5 @@
-import isBoolean from 'lodash/isBoolean';
-import mapValues from 'lodash/mapValues';
+import isBoolean from 'lodash/isBoolean.js';
+import mapValues from 'lodash/mapValues.js';
 
 export interface Params {
   [k: string]: string | boolean | number;

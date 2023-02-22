@@ -1,15 +1,15 @@
 import assert from 'assert';
-import { SolrCollectionsBackupsListBackupsParams } from './introspected';
-import { SolrCollectionsBackupsPostRequest } from './introspected';
-import { SolrCollectionsDeleteAliasParams } from './introspected';
-import { SolrCollectionsPostRequest } from './introspected';
-import { SolrCollectionsCreateAliasParams } from './introspected';
-import { SolrCollectionsBackupsListBackupsResponse } from './introspected/SolrCollectionsBackupsListBackupsResponse';
-import { SolrClient } from './SolrClient';
-import { SolrRequestParams } from './SolrClient';
-import { SolrCollection } from './SolrCollection';
-import type { SolrCollectionOptions } from './SolrCollection';
-import type { SolrResponseHeader } from './types';
+import { SolrCollectionsBackupsListBackupsParams } from './introspected/index.js';
+import { SolrCollectionsBackupsPostRequest } from './introspected/index.js';
+import { SolrCollectionsDeleteAliasParams } from './introspected/index.js';
+import { SolrCollectionsPostRequest } from './introspected/index.js';
+import { SolrCollectionsCreateAliasParams } from './introspected/index.js';
+import { SolrCollectionsBackupsListBackupsResponse } from './introspected/SolrCollectionsBackupsListBackupsResponse.js';
+import { SolrClient } from './SolrClient.js';
+import { SolrRequestParams } from './SolrClient.js';
+import { SolrCollection } from './SolrCollection.js';
+import type { SolrCollectionOptions } from './SolrCollection.js';
+import type { SolrResponseHeader } from './types/index.js';
 
 export interface SolrCollectionsListNamesResponse {
   responseHeader: SolrResponseHeader;

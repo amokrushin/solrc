@@ -1,6 +1,6 @@
-import { SolrCopyFieldDefinition } from './SolrCopyFieldDefinition';
-import { SolrFieldDefinition } from './SolrFieldDefinition';
-import { SolrFieldTypeDefinition } from './SolrFieldTypeDefinition';
+import { SolrCopyFieldDefinition } from './SolrCopyFieldDefinition.js';
+import { SolrFieldDefinition } from './SolrFieldDefinition.js';
+import { SolrFieldTypeDefinition } from './SolrFieldTypeDefinition.js';
 
 export interface SolrSchemaDefinition {
   name: string;

@@ -1,5 +1,5 @@
-import { SolrAnalyzerDefinition } from './SolrAnalyzerDefinition';
-import { SolrIndexAnalyzerDefinition } from './SolrIndexAnalyzerDefinition';
+import { SolrAnalyzerDefinition } from './SolrAnalyzerDefinition.js';
+import { SolrIndexAnalyzerDefinition } from './SolrIndexAnalyzerDefinition.js';
 
 export interface SolrFieldTypeDefinition {
   /**

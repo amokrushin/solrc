@@ -1,4 +1,4 @@
-import { SolrAnalyzerFormat } from './SolrAnalyzerFormat';
+import { SolrAnalyzerFormat } from './SolrAnalyzerFormat.js';
 
 export interface SolrAnalyzerFilterDefinition {
   class: string;

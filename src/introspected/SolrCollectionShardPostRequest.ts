@@ -1,4 +1,4 @@
-import type { SolrCollectionShardForceLeaderParams } from './SolrCollectionShardForceLeaderParams';
+import type { SolrCollectionShardForceLeaderParams } from './SolrCollectionShardForceLeaderParams.js';
 
 /**
  * @version Solr 9.x

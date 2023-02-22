@@ -1,11 +1,11 @@
-import { SolrCollectionSchemaGetRequest } from './introspected';
-import { SolrRequestParams } from './SolrClient';
-import type { SolrCollection } from './SolrCollection';
-import { SolrCollectionSchemaCopyFields } from './SolrCollectionSchemaCopyFields';
-import { SolrCollectionSchemaFields } from './SolrCollectionSchemaFields';
-import { SolrCollectionSchemaFieldTypes } from './SolrCollectionSchemaFieldTypes';
-import type { SolrResponse } from './types';
-import type { SolrSchemaDefinition } from './types';
+import { SolrCollectionSchemaGetRequest } from './introspected/index.js';
+import { SolrRequestParams } from './SolrClient.js';
+import type { SolrCollection } from './SolrCollection.js';
+import { SolrCollectionSchemaCopyFields } from './SolrCollectionSchemaCopyFields.js';
+import { SolrCollectionSchemaFields } from './SolrCollectionSchemaFields.js';
+import { SolrCollectionSchemaFieldTypes } from './SolrCollectionSchemaFieldTypes.js';
+import type { SolrResponse } from './types/index.js';
+import type { SolrSchemaDefinition } from './types/index.js';
 
 export interface SolrCollectionSchemaResponse extends SolrResponse {
   schema: SolrSchemaDefinition;

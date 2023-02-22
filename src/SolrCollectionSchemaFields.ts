@@ -1,16 +1,16 @@
-import castArray from 'lodash/castArray';
-import difference from 'lodash/difference';
-import pickFp from 'lodash/fp/pick';
-import intersection from 'lodash/intersection';
-import isMatch from 'lodash/isMatch';
-import keyBy from 'lodash/keyBy';
-import { SolrCollectionSchemaGetRequest } from './introspected';
-import { SolrCollectionSchemaPostRequest } from './introspected';
-import { SolrCollectionSchemaAddFieldParams } from './introspected';
-import type { SolrCollectionSchema } from './SolrCollectionSchema';
-import { MaybeCollection } from './types';
-import type { SolrFieldDefinition } from './types';
-import type { SolrResponse } from './types';
+import castArray from 'lodash/castArray.js';
+import difference from 'lodash/difference.js';
+import pickFp from 'lodash/fp/pick.js';
+import intersection from 'lodash/intersection.js';
+import isMatch from 'lodash/isMatch.js';
+import keyBy from 'lodash/keyBy.js';
+import { SolrCollectionSchemaGetRequest } from './introspected/index.js';
+import { SolrCollectionSchemaPostRequest } from './introspected/index.js';
+import { SolrCollectionSchemaAddFieldParams } from './introspected/index.js';
+import type { SolrCollectionSchema } from './SolrCollectionSchema.js';
+import { MaybeCollection } from './types/index.js';
+import type { SolrFieldDefinition } from './types/index.js';
+import type { SolrResponse } from './types/index.js';
 
 export interface SolrSchemaFieldsResponse extends SolrResponse {
   fields: SolrFieldDefinition[];
@@ -197,7 +197,10 @@ export class SolrCollectionSchemaFields {
 
     const fieldNamesToReplace = intersection(fieldNames, prevFieldNames).filter(
       (filedName) => {
-        return !isMatch(prevFieldsByName[filedName], fieldsByName[filedName]);
+        return !isMatch(
+          (prevFieldsByName as any)[filedName],
+          (fieldsByName as any)[filedName]
+        );
       }
     );
     const fieldNamesToAdd = difference(fieldNames, prevFieldNames);
@@ -209,8 +212,12 @@ export class SolrCollectionSchemaFields {
       method: 'post',
       data: {
         'delete-field': fieldNamesToDelete.map((name) => ({ name })),
-        'add-field': fieldNamesToAdd.map((name) => fieldsByName[name]),
-        'replace-field': fieldNamesToReplace.map((name) => fieldsByName[name]),
+        'add-field': fieldNamesToAdd.map(
+          (name) => fieldsByName[name]
+        ) as SolrCollectionSchemaAddFieldParams[],
+        'replace-field': fieldNamesToReplace.map(
+          (name) => fieldsByName[name]
+        ) as SolrCollectionSchemaAddFieldParams[],
       },
       params: {
         commit: this.schema.collection.options.autoCommit,

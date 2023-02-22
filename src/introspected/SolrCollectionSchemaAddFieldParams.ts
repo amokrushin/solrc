@@ -84,6 +84,7 @@ export interface SolrCollectionSchemaAddFieldParams {
    * If true, indicates that an indexed="true" docValues="false" field can be "un-inverted" at query time
    * to build up large in memory data structure to serve in place of DocValues. Defaults to true for historical
    * reasons, but users are strongly encouraged to set this to false for stability and use docValues="true" as needed.
+   * @version Solr 9.x
    */
   uninvertible?: boolean;
 }

@@ -1,5 +1,5 @@
-import type { SolrCollectionsBackupsListBackupsParams } from './SolrCollectionsBackupsListBackupsParams';
-import type { SolrCollectionsBackupsDeleteBackupsParams } from './SolrCollectionsBackupsDeleteBackupsParams';
+import type { SolrCollectionsBackupsListBackupsParams } from './SolrCollectionsBackupsListBackupsParams.js';
+import type { SolrCollectionsBackupsDeleteBackupsParams } from './SolrCollectionsBackupsDeleteBackupsParams.js';
 
 export interface SolrCollectionsBackupsPostRequest {
   /**

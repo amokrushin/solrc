@@ -1,14 +1,14 @@
-import type { SolrCollectionSchemaAddCopyFieldParams } from './SolrCollectionSchemaAddCopyFieldParams';
-import type { SolrCollectionSchemaAddDynamicFieldParams } from './SolrCollectionSchemaAddDynamicFieldParams';
-import type { SolrCollectionSchemaAddFieldParams } from './SolrCollectionSchemaAddFieldParams';
-import type { SolrCollectionSchemaAddFieldTypeParams } from './SolrCollectionSchemaAddFieldTypeParams';
-import type { SolrCollectionSchemaDeleteCopyFieldParams } from './SolrCollectionSchemaDeleteCopyFieldParams';
-import type { SolrCollectionSchemaDeleteDynamicFieldParams } from './SolrCollectionSchemaDeleteDynamicFieldParams';
-import type { SolrCollectionSchemaDeleteFieldParams } from './SolrCollectionSchemaDeleteFieldParams';
-import type { SolrCollectionSchemaDeleteFieldTypeParams } from './SolrCollectionSchemaDeleteFieldTypeParams';
-import type { SolrCollectionSchemaReplaceDynamicFieldParams } from './SolrCollectionSchemaReplaceDynamicFieldParams';
-import type { SolrCollectionSchemaReplaceFieldParams } from './SolrCollectionSchemaReplaceFieldParams';
-import type { SolrCollectionSchemaReplaceFieldTypeParams } from './SolrCollectionSchemaReplaceFieldTypeParams';
+import type { SolrCollectionSchemaAddCopyFieldParams } from './SolrCollectionSchemaAddCopyFieldParams.js';
+import type { SolrCollectionSchemaAddDynamicFieldParams } from './SolrCollectionSchemaAddDynamicFieldParams.js';
+import type { SolrCollectionSchemaAddFieldParams } from './SolrCollectionSchemaAddFieldParams.js';
+import type { SolrCollectionSchemaAddFieldTypeParams } from './SolrCollectionSchemaAddFieldTypeParams.js';
+import type { SolrCollectionSchemaDeleteCopyFieldParams } from './SolrCollectionSchemaDeleteCopyFieldParams.js';
+import type { SolrCollectionSchemaDeleteDynamicFieldParams } from './SolrCollectionSchemaDeleteDynamicFieldParams.js';
+import type { SolrCollectionSchemaDeleteFieldParams } from './SolrCollectionSchemaDeleteFieldParams.js';
+import type { SolrCollectionSchemaDeleteFieldTypeParams } from './SolrCollectionSchemaDeleteFieldTypeParams.js';
+import type { SolrCollectionSchemaReplaceDynamicFieldParams } from './SolrCollectionSchemaReplaceDynamicFieldParams.js';
+import type { SolrCollectionSchemaReplaceFieldParams } from './SolrCollectionSchemaReplaceFieldParams.js';
+import type { SolrCollectionSchemaReplaceFieldTypeParams } from './SolrCollectionSchemaReplaceFieldTypeParams.js';
 
 export interface SolrCollectionSchemaPostRequest {
   'add-field'?:

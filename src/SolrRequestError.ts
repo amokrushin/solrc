@@ -1,4 +1,4 @@
-import { SolrActionErrorResponse } from './types/SolrActionErrorResponse';
+import { SolrActionErrorResponse } from './types/SolrActionErrorResponse.js';
 
 type ResponseBody = SolrActionErrorResponse & { message?: string };
 

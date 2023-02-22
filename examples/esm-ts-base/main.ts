@@ -1,11 +1,11 @@
 import assert from 'assert';
 import dotenv from 'dotenv';
-import find from 'lodash/find';
-import isMatch from 'lodash/isMatch';
-import some from 'lodash/some';
-import sortBy from 'lodash/sortBy';
+import find from 'lodash/find.js';
+import isMatch from 'lodash/isMatch.js';
+import some from 'lodash/some.js';
+import sortBy from 'lodash/sortBy.js';
 import process from 'process';
-import { SolrClient } from '../../src';
+import { SolrClient } from '../../src/index.js';
 
 dotenv.config();
 

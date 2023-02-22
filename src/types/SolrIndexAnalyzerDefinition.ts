@@ -1,5 +1,5 @@
-import { SolrIndexAnalyzerFilterDefinition } from './SolrIndexAnalyzerFilterDefinition';
-import { SolrIndexAnalyzerTokenizerDefinition } from './SolrIndexAnalyzerTokenizerDefinition';
+import { SolrIndexAnalyzerFilterDefinition } from './SolrIndexAnalyzerFilterDefinition.js';
+import { SolrIndexAnalyzerTokenizerDefinition } from './SolrIndexAnalyzerTokenizerDefinition.js';
 
 export interface SolrIndexAnalyzerDefinition {
   tokenizer: SolrIndexAnalyzerTokenizerDefinition;

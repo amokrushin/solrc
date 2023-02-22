@@ -1,14 +1,14 @@
-import castArray from 'lodash/castArray';
-import pickFp from 'lodash/fp/pick';
-import { SolrCollectionSchemaGetRequest } from './introspected';
-import { SolrCollectionSchemaReplaceFieldTypeParams } from './introspected';
-import { SolrCollectionSchemaDeleteFieldTypeParams } from './introspected';
-import { SolrCollectionSchemaAddFieldTypeParams } from './introspected';
-import { SolrCollectionSchemaPostRequest } from './introspected';
-import type { SolrCollectionSchema } from './SolrCollectionSchema';
-import { MaybeCollection } from './types';
-import type { SolrFieldTypeDefinition } from './types';
-import type { SolrResponse } from './types';
+import castArray from 'lodash/castArray.js';
+import pickFp from 'lodash/fp/pick.js';
+import { SolrCollectionSchemaGetRequest } from './introspected/index.js';
+import { SolrCollectionSchemaReplaceFieldTypeParams } from './introspected/index.js';
+import { SolrCollectionSchemaDeleteFieldTypeParams } from './introspected/index.js';
+import { SolrCollectionSchemaAddFieldTypeParams } from './introspected/index.js';
+import { SolrCollectionSchemaPostRequest } from './introspected/index.js';
+import type { SolrCollectionSchema } from './SolrCollectionSchema.js';
+import { MaybeCollection } from './types/index.js';
+import type { SolrFieldTypeDefinition } from './types/index.js';
+import type { SolrResponse } from './types/index.js';
 
 export interface SolrSchemaFieldTypesResponse extends SolrResponse {
   fieldTypes: SolrFieldTypeDefinition[];

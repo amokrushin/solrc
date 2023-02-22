@@ -1,4 +1,4 @@
-import { SolrResponse } from '../types';
+import { SolrResponse } from '../types/index.js';
 
 export interface SolrCollectionConfigGetResponse extends SolrResponse {
   config: {

@@ -20,6 +20,11 @@ export interface SolrCollectionsRestoreCollectionParams {
    */
   location?: string;
   /**
+   * The ID of the backup to restore, when the provided location and backup name hold multiple backups for the provided collection.  Defaults to the most recent backup if not specified.
+   * @version Solr 8.x, 9.x
+   */
+  backupId?: number;
+  /**
    * Defines a request ID that can be used to track this action after it's submitted. The action will be processed asynchronously.
    */
   async?: string;
@@ -29,10 +34,6 @@ export interface SolrCollectionsRestoreCollectionParams {
   'create-collection'?: {
     [k: string]: unknown;
   };
-  /**
-   * @version Solr 9.x
-   */
-  backupId?: number;
   /**
    * @version Solr 9.x
    */

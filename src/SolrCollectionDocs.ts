@@ -1,11 +1,11 @@
-import ary from 'lodash/ary';
-import map from 'lodash/map';
+import ary from 'lodash/ary.js';
+import map from 'lodash/map.js';
 import { Writable } from 'stream';
 import { WritableOptions } from 'stream';
-import { SolrCollectionOptions } from './SolrCollection';
-import type { SolrCollection } from './SolrCollection';
-import { SolrDoc } from './types';
-import { castArray } from './utils/generic';
+import { SolrCollectionOptions } from './SolrCollection.js';
+import type { SolrCollection } from './SolrCollection.js';
+import { SolrDoc } from './types/index.js';
+import { castArray } from './utils/generic.js';
 
 type SolrDeleteDef = string | string[] | { query: string };
 

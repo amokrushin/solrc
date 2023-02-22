@@ -1,6 +1,6 @@
-import type { SolrCollectionShardsAddReplicaParams } from './SolrCollectionShardsAddReplicaParams';
-import type { SolrCollectionShardsCreateParams } from './SolrCollectionShardsCreateParams';
-import type { SolrCollectionShardsSplitParams } from './SolrCollectionShardsSplitParams';
+import type { SolrCollectionShardsAddReplicaParams } from './SolrCollectionShardsAddReplicaParams.js';
+import type { SolrCollectionShardsCreateParams } from './SolrCollectionShardsCreateParams.js';
+import type { SolrCollectionShardsSplitParams } from './SolrCollectionShardsSplitParams.js';
 
 export interface SolrCollectionShardsPostRequest {
   /**

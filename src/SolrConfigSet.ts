@@ -1,5 +1,5 @@
-import type { SolrRequestParams } from './SolrClient';
-import type { SolrConfigSets } from './SolrConfigSets';
+import type { SolrRequestParams } from './SolrClient.js';
+import type { SolrConfigSets } from './SolrConfigSets.js';
 
 /**
  * Конфигурация

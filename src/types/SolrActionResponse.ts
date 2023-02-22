@@ -1,4 +1,4 @@
-import { SolrResponse } from './SolrResponse';
+import { SolrResponse } from './SolrResponse.js';
 
 export interface SolrActionResponse extends SolrResponse {
   success?: {

@@ -1,4 +1,4 @@
-/**
+/*
  * Introspected endpoint: /collections
  * Command: create
  */

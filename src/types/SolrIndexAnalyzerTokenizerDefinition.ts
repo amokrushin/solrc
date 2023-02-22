@@ -1,4 +1,4 @@
-import { SolrTokenizerFactory } from './SolrTokenizerFactory';
+import { SolrTokenizerFactory } from './SolrTokenizerFactory.js';
 
 export interface SolrIndexAnalyzerTokenizerDefinition {
   class: SolrTokenizerFactory;

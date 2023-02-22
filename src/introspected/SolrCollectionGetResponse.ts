@@ -1,4 +1,4 @@
-import { SolrResponse } from '../types';
+import { SolrResponse } from '../types/index.js';
 
 /**
  * @version @version Solr 8.x, 9.x

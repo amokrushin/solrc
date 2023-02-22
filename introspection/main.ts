@@ -5,68 +5,68 @@ import fs from 'fs/promises';
 import { JSONSchema4 } from 'json-schema';
 import { compile } from 'json-schema-to-typescript';
 import traverse from 'json-schema-traverse';
-import camelCase from 'lodash/camelCase';
-import difference from 'lodash/difference';
-import upperFirst from 'lodash/upperFirst';
+import camelCase from 'lodash/camelCase.js';
+import difference from 'lodash/difference.js';
+import upperFirst from 'lodash/upperFirst.js';
 import Path from 'path';
 import process from 'process';
 import shell from 'shelljs';
-import { SolrClientParams } from '../src';
-import { SolrClient } from '../src';
+import { SolrClientParams } from '../src/index.js';
+import { SolrClient } from '../src/index.js';
 
 dotenv.config();
 
 // prettier-ignore
 const endpoints = {
-  '/collections': 'SolrCollections',
-  '/collections/{collection}': 'SolrCollection',
-  '/collections/{collection}/admin/ping': 'SolrCollectionAdmin', // not implemented in v2
-  '/collections/{collection}/config': 'SolrCollectionConfig',
-  '/collections/{collection}/config/jmx': 'SolrCollectionConfigJmx',
-  '/collections/{collection}/config/overlay': 'SolrCollectionConfigOverlay',
-  '/collections/{collection}/config/params': 'SolrCollectionConfigParams',
-  '/collections/{collection}/config/params/{params_set}': 'SolrCollectionConfigParamsSet',
-  '/collections/{collection}/config/query': 'SolrCollectionConfigQuery',
-  '/collections/{collection}/config/requestDispatcher': 'SolrCollectionConfigRequestDispatcher',
-  '/collections/{collection}/config/znodeVersion': 'SolrCollectionConfigZnodeVersion',
-  '/collections/{collection}/config/{plugin}': 'SolrCollectionConfigPlugin',
-  '/collections/{collection}/export': 'SolrCollectionExport',
-  '/collections/{collection}/get': 'SolrCollectionGet',
-  '/collections/{collection}/node/health': 'SolrCollectionNodeHealth',
-  '/collections/{collection}/node/properties': 'SolrCollectionNodeProperties',
-  '/collections/{collection}/node/threads': 'SolrCollectionNodeThreads',
-  '/collections/{collection}/node/system': 'SolrCollectionNodeSystem',
-  '/collections/{collection}/schema': 'SolrCollectionSchema',
-  '/collections/{collection}/schema/copyfields': 'SolrCollectionSchemaCopyFields',
-  '/collections/{collection}/schema/dynamicfields': 'SolrCollectionSchemaDynamicFields',
-  '/collections/{collection}/schema/dynamicfields/{name}': 'SolrCollectionSchemaDynamicFieldsName',
-  '/collections/{collection}/schema/name': 'SolrCollectionSchemaName',
-  '/collections/{collection}/schema/fields': 'SolrCollectionSchemaFields',
-  '/collections/{collection}/schema/fields/{name}': 'SolrCollectionSchemaField',
-  '/collections/{collection}/schema/fieldtypes': 'SolrCollectionSchemaFieldTypes',
-  '/collections/{collection}/schema/fieldtypes/{name}': 'SolrCollectionSchemaFieldType',
-  '/collections/{collection}/schema/similarity': 'SolrCollectionSchemaSimilarity',
-  '/collections/{collection}/schema/solrqueryparser': 'SolrCollectionSchemaSolrQueryParser',
-  '/collections/{collection}/schema/uniquekey': 'SolrCollectionSchemaUniqueKey',
-  '/collections/{collection}/schema/version': 'SolrCollectionSchemaVersion',
-  '/collections/{collection}/schema/zkversion': 'SolrCollectionSchemaZkVersion',
-  '/collections/{collection}/select': 'SolrCollectionSelect',
-  '/collections/{collection}/shards': 'SolrCollectionShards',
-  '/collections/{collection}/shards/{shard}': 'SolrCollectionShard',
-  '/collections/{collection}/shards/{shard}/{replica}': 'SolrCollectionShardReplica',
-  '/collections/{collection}/tasks/cancel': 'SolrCollectionTasksCancel',
-  '/collections/{collection}/tasks/list': 'SolrCollectionTasksList',
-  '/collections/{collection}/terms': 'SolrCollectionTerms',
-  '/collections/{collection}/query': 'SolrCollectionQuery',
-  '/collections/{collection}/update': 'SolrCollectionUpdate',
-  '/collections/{collection}/update/bin': 'SolrCollectionUpdateBin',
-  '/collections/{collection}/update/csv': 'SolrCollectionUpdateCsv',
-  '/collections/{collection}/update/json': 'SolrCollectionUpdateJson',
-  '/collections/{collection}/update/json/commands': 'SolrCollectionUpdateJsonCommands',
-  '/collections/{collection}/update/xml': 'SolrCollectionUpdateXml',
-  '/collections/backups': 'SolrCollectionsBackups',
-  '/collections/backups/shards/{shard}': 'SolrCollectionsBackupsShard',
-  '/collections/backups/shards/{shard}/{replica}': 'SolrCollectionsBackupsShardReplica',
+    '/collections': 'SolrCollections',
+    '/collections/{collection}': 'SolrCollection',
+    '/collections/{collection}/admin/ping': 'SolrCollectionAdmin', // not implemented in v2
+    '/collections/{collection}/config': 'SolrCollectionConfig',
+    '/collections/{collection}/config/jmx': 'SolrCollectionConfigJmx',
+    '/collections/{collection}/config/overlay': 'SolrCollectionConfigOverlay',
+    '/collections/{collection}/config/params': 'SolrCollectionConfigParams',
+    '/collections/{collection}/config/params/{params_set}': 'SolrCollectionConfigParamsSet',
+    '/collections/{collection}/config/query': 'SolrCollectionConfigQuery',
+    '/collections/{collection}/config/requestDispatcher': 'SolrCollectionConfigRequestDispatcher',
+    '/collections/{collection}/config/znodeVersion': 'SolrCollectionConfigZnodeVersion',
+    '/collections/{collection}/config/{plugin}': 'SolrCollectionConfigPlugin',
+    '/collections/{collection}/export': 'SolrCollectionExport',
+    '/collections/{collection}/get': 'SolrCollectionGet',
+    '/collections/{collection}/node/health': 'SolrCollectionNodeHealth',
+    '/collections/{collection}/node/properties': 'SolrCollectionNodeProperties',
+    '/collections/{collection}/node/threads': 'SolrCollectionNodeThreads',
+    '/collections/{collection}/node/system': 'SolrCollectionNodeSystem',
+    '/collections/{collection}/schema': 'SolrCollectionSchema',
+    '/collections/{collection}/schema/copyfields': 'SolrCollectionSchemaCopyFields',
+    '/collections/{collection}/schema/dynamicfields': 'SolrCollectionSchemaDynamicFields',
+    '/collections/{collection}/schema/dynamicfields/{name}': 'SolrCollectionSchemaDynamicFieldsName',
+    '/collections/{collection}/schema/name': 'SolrCollectionSchemaName',
+    '/collections/{collection}/schema/fields': 'SolrCollectionSchemaFields',
+    '/collections/{collection}/schema/fields/{name}': 'SolrCollectionSchemaField',
+    '/collections/{collection}/schema/fieldtypes': 'SolrCollectionSchemaFieldTypes',
+    '/collections/{collection}/schema/fieldtypes/{name}': 'SolrCollectionSchemaFieldType',
+    '/collections/{collection}/schema/similarity': 'SolrCollectionSchemaSimilarity',
+    '/collections/{collection}/schema/solrqueryparser': 'SolrCollectionSchemaSolrQueryParser',
+    '/collections/{collection}/schema/uniquekey': 'SolrCollectionSchemaUniqueKey',
+    '/collections/{collection}/schema/version': 'SolrCollectionSchemaVersion',
+    '/collections/{collection}/schema/zkversion': 'SolrCollectionSchemaZkVersion',
+    '/collections/{collection}/select': 'SolrCollectionSelect',
+    '/collections/{collection}/shards': 'SolrCollectionShards',
+    '/collections/{collection}/shards/{shard}': 'SolrCollectionShard',
+    '/collections/{collection}/shards/{shard}/{replica}': 'SolrCollectionShardReplica',
+    '/collections/{collection}/tasks/cancel': 'SolrCollectionTasksCancel',
+    '/collections/{collection}/tasks/list': 'SolrCollectionTasksList',
+    '/collections/{collection}/terms': 'SolrCollectionTerms',
+    '/collections/{collection}/query': 'SolrCollectionQuery',
+    '/collections/{collection}/update': 'SolrCollectionUpdate',
+    '/collections/{collection}/update/bin': 'SolrCollectionUpdateBin',
+    '/collections/{collection}/update/csv': 'SolrCollectionUpdateCsv',
+    '/collections/{collection}/update/json': 'SolrCollectionUpdateJson',
+    '/collections/{collection}/update/json/commands': 'SolrCollectionUpdateJsonCommands',
+    '/collections/{collection}/update/xml': 'SolrCollectionUpdateXml',
+    '/collections/backups': 'SolrCollectionsBackups',
+    '/collections/backups/shards/{shard}': 'SolrCollectionsBackupsShard',
+    '/collections/backups/shards/{shard}/{replica}': 'SolrCollectionsBackupsShardReplica',
 };
 
 const availableEndpoints = new Set();
@@ -128,21 +128,25 @@ const maybeCollectionTypes = new Set([
 ]);
 
 const createRequestType: Params = (name, commandTypes) => {
-  return [
-    ...Object.values(commandTypes).map(
-      (typeName) => `import type { ${typeName} } from './${typeName}';`
-    ),
-    '',
-    `export interface ${name} {`,
-    ...Object.entries(commandTypes).map(([command, commandType]) =>
-      maybeCollectionTypes.has(commandType)
-        ? `  '${command}'?: ${commandType} | ${commandType}[];`
-        : `  '${command}'?: ${commandType};`
-    ),
-    '}',
-  ]
-    .join('\n')
-    .concat('\n');
+  const values = Object.values(commandTypes);
+  const entries = Object.entries(commandTypes);
+  return values.length
+    ? [
+        ...values.map(
+          (typeName) => `import type { ${typeName} } from './${typeName}.js';`
+        ),
+        '',
+        `export interface ${name} {`,
+        ...entries.map(([command, commandType]) =>
+          maybeCollectionTypes.has(commandType)
+            ? `  '${command}'?: ${commandType} | ${commandType}[];`
+            : `  '${command}'?: ${commandType};`
+        ),
+        '}',
+      ]
+        .join('\n')
+        .concat('\n')
+    : `export interface ${name} {}\n`;
 };
 
 const fixDefaultValues = (schema: any) => {
@@ -154,6 +158,12 @@ const fixDefaultValues = (schema: any) => {
       val.default = Number(val.default);
     }
   });
+};
+
+const disallowAdditionalProperties = (schema: JSONSchema4) => {
+  if (schema.additionalProperties) {
+    schema.additionalProperties = false;
+  }
 };
 
 async function introspect(params: IntrospectParams): Promise<void> {
@@ -199,11 +209,16 @@ async function introspect(params: IntrospectParams): Promise<void> {
         if (spec?.commands) {
           for (const [command, schema] of Object.entries(spec.commands)) {
             fixDefaultValues(schema);
+            disallowAdditionalProperties(schema as JSONSchema4);
             const typeName = upperFirst(
               camelCase([namespace, command, 'Params'].join('-'))
             );
             try {
+              // if (typeName === 'SolrCollectionConfigAddInitparamsParams') {
+              //   console.dir(schema, { colors: true, depth: 4 });
+              // }
               const typedef = await compile(schema as JSONSchema4, typeName, {
+                additionalProperties: false,
                 bannerComment: createBannerComment(endpointTemplate, command),
               });
               const path = Path.join(params.outDir, `${typeName}.ts`);
@@ -246,7 +261,7 @@ async function introspect(params: IntrospectParams): Promise<void> {
 
   const indexFile = index
     .sort()
-    .map((name) => `export * from './${name}';`)
+    .map((name) => `export * from './${name}.js';`)
     .join('\n');
   await fs.writeFile(Path.join(params.outDir, 'index.ts'), indexFile);
   await collection.delete();
@@ -275,6 +290,6 @@ introspect({
   },
   outDir: Path.join(
     `${process.cwd()}`,
-    `generated_${process.env.SOLR_VERSION?.replace('.', '')}`
+    `generated_${process.env.SOLR_VERSION?.replace(/\./g, '_')}`
   ),
 }).catch(console.error);

@@ -1,4 +1,4 @@
-import { SolrResponseHeader } from '../types';
+import { SolrResponseHeader } from '../types/index.js';
 
 /**
  * @version Solr 8.x, 9.x

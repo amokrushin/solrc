@@ -1,5 +1,5 @@
-import toUpper from 'lodash/toUpper';
-import { SolrCollection } from './SolrCollection';
+import toUpper from 'lodash/toUpper.js';
+import { SolrCollection } from './SolrCollection.js';
 
 export interface SolrCollectionAdminPingResponse {
   status: string;

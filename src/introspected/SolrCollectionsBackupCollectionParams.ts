@@ -23,6 +23,16 @@ export interface SolrCollectionsBackupCollectionParams {
    */
   location?: string;
   /**
+   * Controls whether aliases are resolved when trying to back up the specified collection, or whether Solr should only backup the provided collection name if it matches a concrete collection.
+   * @version Solr 8.x, Solr 9.x
+   */
+  followAliases?: boolean;
+  /**
+   * An internal property that controls whether the backup should use the standard 'incremental' file format or the deprecated 'full-snapshot' based format.
+   * @version Solr 8.x, Solr 9.x
+   */
+  incremental?: boolean;
+  /**
    * Defines a request ID that can be used to track this action after it's submitted. The action will be processed asynchronously.
    * @version Solr 8.x, 9.x
    */
@@ -32,11 +42,6 @@ export interface SolrCollectionsBackupCollectionParams {
    */
   indexBackup?: string;
   /**
-   * A boolean parameter allowing users to choose whether to create an incremental (incremental=true) or a "snapshot" (incremental=false) backup. If unspecified, backups are done incrementally by default. Incremental backups are preferred in all known circumstances and snapshot backups are deprecated, so this parameter should only be used after much consideration.
-   * @version Solr 9.x
-   */
-  incremental?: boolean;
-  /**
    * The name of a repository to be used for the backup. If no repository is specified then the local filesystem repository will be used automatically.
    * @version Solr 9.x
    */
@@ -45,8 +50,4 @@ export interface SolrCollectionsBackupCollectionParams {
    * @version Solr 9.x
    */
   commitName?: string;
-  /**
-   * @version Solr 9.x
-   */
-  followAliases?: boolean;
 }

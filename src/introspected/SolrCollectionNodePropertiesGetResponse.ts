@@ -1,4 +1,4 @@
-import { SolrResponseHeader } from '../types';
+import { SolrResponseHeader } from '../types/index.js';
 
 type NodePropertiesNames =
   | 'java.vendor'

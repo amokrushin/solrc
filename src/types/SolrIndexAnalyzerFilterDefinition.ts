@@ -1,4 +1,4 @@
-import { SolrWords } from './SolrWords';
+import { SolrWords } from './SolrWords.js';
 
 export interface SolrIndexAnalyzerFilterDefinition {
   class: string;

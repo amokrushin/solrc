@@ -1,8 +1,8 @@
-import type { SolrClient } from './SolrClient';
-import type { SolrRequestParams } from './SolrClient';
-import { SolrConfigSet } from './SolrConfigSet';
-import type { SolrResponse } from './types';
-import type { SolrCopyFieldDefinition } from './types';
+import type { SolrClient } from './SolrClient.js';
+import type { SolrRequestParams } from './SolrClient.js';
+import { SolrConfigSet } from './SolrConfigSet.js';
+import type { SolrResponse } from './types/index.js';
+import type { SolrCopyFieldDefinition } from './types/index.js';
 
 export interface SolrConfigSetsResponse extends SolrResponse {
   configSets: SolrCopyFieldDefinition[];

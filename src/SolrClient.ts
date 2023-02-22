@@ -1,15 +1,15 @@
 import assert from 'assert';
 import got from 'got';
 import { URLSearchParams } from 'url';
-import { SolrCollectionNodeSystemGetRequest } from './introspected';
-import { SolrCollectionNodePropertiesGetRequest } from './introspected/SolrCollectionNodePropertiesGetRequest';
-import { SolrCollectionNodePropertiesGetResponse } from './introspected/SolrCollectionNodePropertiesGetResponse';
-import { SolrCollectionNodeSystemGetResponse } from './introspected/SolrCollectionNodeSystemGetResponse';
-import { SolrCollections } from './SolrCollections';
-import { SolrConfigSets } from './SolrConfigSets';
-import { SolrRequestError } from './SolrRequestError';
-import { SolrResponse } from './types';
-import preprocessParams from './utils/preprocessParams';
+import { SolrCollectionNodeSystemGetRequest } from './introspected/index.js';
+import { SolrCollectionNodePropertiesGetRequest } from './introspected/SolrCollectionNodePropertiesGetRequest.js';
+import { SolrCollectionNodePropertiesGetResponse } from './introspected/SolrCollectionNodePropertiesGetResponse.js';
+import { SolrCollectionNodeSystemGetResponse } from './introspected/SolrCollectionNodeSystemGetResponse.js';
+import { SolrCollections } from './SolrCollections.js';
+import { SolrConfigSets } from './SolrConfigSets.js';
+import { SolrRequestError } from './SolrRequestError.js';
+import { SolrResponse } from './types/index.js';
+import preprocessParams from './utils/preprocessParams.js';
 
 /**
  * @typeParam D SolrRequestDataType

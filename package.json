@@ -16,47 +16,36 @@
   "license": "MIT",
   "author": "Anton Mokrushin <anton@mokr.org>",
   "type": "module",
-  "exports": {
-    ".": {
-      "require": "./lib/cjs/index.js",
-      "default": "./lib/esm/index.js"
-    },
-    "./package.json": "./package.json"
-  },
-  "main": "./lib/cjs/index.js",
-  "module": "./lib/esm/index.js",
-  "types": "./lib/types/index.d.ts",
+  "exports": "./dist/index.js",
   "directories": {
     "example": "examples"
   },
   "scripts": {
-    "build": "rm -rf lib && npm run build:types && npm run build:esm && npm run build:cjs",
-    "build:cjs": "tsc --module commonjs --outDir lib/cjs && echo '{\"type\": \"commonjs\"}' > lib/cjs/package.json",
-    "build:esm": "tsc --module es2020 --outDir lib/esm",
-    "build:types": "tsc --declaration true --declarationDir lib/types --emitDeclarationOnly",
-    "check": "npm run check:eslint && npm run check:prettier",
+    "build": "rm -rf dist && tsc",
+    "check": "npm run check:eslint && npm run check:prettier && npm run check:tsc",
     "check:eslint": "eslint src/",
     "check:fix": "npm run check:eslint -- --fix && npm run check:prettier -- --write",
     "check:prettier": "prettier --check src/",
+    "check:tsc": "tsc --noEmit",
     "hook:precommit": "npm run check:fix",
     "prepare": "husky install",
     "test": "exit 0"
   },
   "dependencies": {
-    "got": "^12.1.0",
+    "got": "^12.5.3",
     "lodash": "^4.17.21"
   },
   "devDependencies": {
-    "@types/lodash": "^4.14.182",
-    "@types/node": "^16.11.36",
-    "@typescript-eslint/eslint-plugin": "^5.26.0",
-    "@typescript-eslint/parser": "^5.26.0",
+    "@types/lodash": "^4.14.191",
+    "@types/node": "^18.14.0",
+    "@typescript-eslint/eslint-plugin": "^5.53.0",
+    "@typescript-eslint/parser": "^5.53.0",
     "boolean": "^3.2.0",
-    "eslint": "^8.16.0",
-    "eslint-config-prettier": "^8.5.0",
-    "husky": "^8.0.1",
-    "prettier": "^2.6.2",
-    "typescript": "^4.7.2"
+    "eslint": "^8.34.0",
+    "eslint-config-prettier": "^8.6.0",
+    "husky": "^8.0.3",
+    "prettier": "^2.8.4",
+    "typescript": "^4.9.5"
   },
   "engines": {
     "node": ">=16",
